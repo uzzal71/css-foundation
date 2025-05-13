@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login | AccountingPro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+      :root {
+        --primary: #3a0ca3;
+        --primary-light: #f0e6ff;
+        --dark: #1e1e1e;
+        --light: #f8f9fa;
+        --border: #e0e0e0;
+        --error: #dc3545;
+        --success: #28a745;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: var(--light);
+        display: flex;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .login-container {
+        width: 100%;
+        max-width: 500px;
+        margin: auto;
+        background-color: white;
+        padding: 40px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+      }
+
+      .logo {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .logo img {
+        height: 40px;
+      }
+
+      .login-form h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: var(--dark);
+        text-align: center;
+      }
+
+      .login-form p {
+        color: #6c757d;
+        margin-bottom: 30px;
+        font-size: 14px;
+        text-align: center;
+        line-height: 1.5;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--dark);
+      }
+
+      .input-group {
+        position: relative;
+      }
+
+      .input-group input {
+        width: 100%;
+        padding: 12px 40px 12px 40px; /* Space for icons on both sides */
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .input-group input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(58, 12, 163, 0.1);
+        outline: none;
+      }
+
+      .input-group i {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 16px;
+        color: #adb5bd;
+        pointer-events: none;
+      }
+
+      .input-group i.fas.fa-user-shield,
+      .input-group i.fas.fa-lock,
+      .input-group i.fas.fa-mobile-alt {
+        left: 15px;
+      }
+
+      .password-toggle {
+        right: 15px;
+        left: auto;
+        pointer-events: auto;
+        cursor: pointer;
+        color: #adb5bd;
+        transition: color 0.3s;
+        font-size: 16px;
+      }
+
+      .password-toggle:hover {
+        color: var(--primary);
+      }
+
+      .remember-forgot {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 1.5rem 0;
+        font-size: 14px;
+      }
+
+      .remember-me {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 12px;
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn:hover {
+        background-color: #2a0880;
+      }
+
+      .error-message {
+        color: var(--error);
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+        display: none;
+        animation: fadeIn 0.3s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-5px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .input-group.error input {
+        border-color: var(--error);
+        box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+      }
+
+      .two-factor {
+        display: none;
+        animation: slideUp 0.5s ease-out;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--border);
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .btn-loading {
+        position: relative;
+        pointer-events: none;
+      }
+
+      .btn-loading::after {
+        content: "";
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-top-color: white;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .success-check {
+        color: var(--success);
+        font-size: 1.5rem;
+        text-align: center;
+        margin: 1rem 0;
+        animation: bounce 0.6s;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .qr-code {
+        text-align: center;
+        margin: 1.5rem 0;
+      }
+
+      .qr-code img {
+        width: 160px;
+        height: 160px;
+        border: 1px solid var(--border);
+        padding: 10px;
+        border-radius: 8px;
+        background: white;
+      }
+
+      .login-switch {
+        text-align: center;
+        margin-top: 1.5rem;
+        font-size: 14px;
+        color: #6c757d;
+      }
+
+      .login-switch a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+        margin-left: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="logo">
+        <i class="fas fa-shield-alt"></i>
+        <span>Accounting Pro</span>
+      </div>
+
+      <div class="login-form">
+        <h2>Admin Portal Login</h2>
+        <p>Secure access to the AccountingPro administration panel</p>
+
+        <form id="mainForm">
+          <div class="form-group">
+            <label for="email">Admin Email</label>
+            <div class="input-group">
+              <i class="fas fa-user-shield"></i>
+              <input type="email" id="email" placeholder="Enter admin email" required />
+              <div class="error-message" id="emailError"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-group">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="password" placeholder="Enter your password" required />
+              <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+              <div class="error-message" id="passwordError"></div>
+            </div>
+          </div>
+
+          <div class="remember-forgot">
+            <div class="remember-me">
+              <input type="checkbox" id="remember" />
+              <label for="remember">Remember this device</label>
+            </div>
+            <div class="forgot-password">
+              <a href="#" id="forgotPassword">Forgot password?</a>
+            </div>
+          </div>
+
+          <button type="submit" class="btn" id="signInBtn">
+            <span class="btn-text">Sign In</span>
+          </button>
+        </form>
+
+        <div class="two-factor" id="twoFactorSection">
+          <div class="success-check">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h4>Two-Factor Authentication</h4>
+          <p>For enhanced security, please authenticate using your 2FA app</p>
+
+          <div class="qr-code">
+            <img src="https://via.placeholder.com/150x150?text=QR+Code" alt="QR Code" />
+          </div>
+
+          <div class="form-group">
+            <label for="totp">6-digit Code</label>
+            <div class="input-group">
+              <i class="fas fa-mobile-alt"></i>
+              <input type="text" id="totp" placeholder="Enter authentication code" maxlength="6" />
+              <div class="error-message" id="totpError"></div>
+            </div>
+          </div>
+
+          <button type="button" class="btn" id="verifyBtn">
+            <span class="btn-text">Verify & Continue</span>
+          </button>
+        </div>
+
+        <div class="login-switch">Customer login? <a href="login.html">Switch to customer portal</a></div>
+      </div>
+    </div>
+
+    <script>
+      const emailInput = document.getElementById("email");
+      const passwordInput = document.getElementById("password");
+      const togglePassword = document.getElementById("togglePassword");
+      const mainForm = document.getElementById("mainForm");
+      const twoFactorSection = document.getElementById("twoFactorSection");
+      const verifyBtn = document.getElementById("verifyBtn");
+      const signInBtn = document.getElementById("signInBtn");
+
+      togglePassword.addEventListener("click", () => {
+        const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+        passwordInput.setAttribute("type", type);
+        togglePassword.classList.toggle("fa-eye-slash");
+      });
+
+      function showError(input, message) {
+        const inputGroup = input.parentElement;
+        const error = inputGroup.querySelector(".error-message");
+        inputGroup.classList.add("error");
+        error.textContent = message;
+        error.style.display = "block";
+      }
+
+      function clearError(input) {
+        const inputGroup = input.parentElement;
+        inputGroup.classList.remove("error");
+        const error = inputGroup.querySelector(".error-message");
+        error.textContent = "";
+        error.style.display = "none";
+      }
+
+      emailInput.addEventListener("input", () => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(emailInput.value)) {
+          showError(emailInput, "Please enter a valid email address");
+        } else {
+          clearError(emailInput);
+        }
+      });
+
+      passwordInput.addEventListener("input", () => {
+        if (passwordInput.value.length < 8) {
+          showError(passwordInput, "Password must be at least 8 characters");
+        } else {
+          clearError(passwordInput);
+        }
+      });
+
+      mainForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        signInBtn.classList.add("btn-loading");
+        signInBtn.disabled = true;
+
+        await new Promise((resolve) => setTimeout(resolve, 1500));
+
+        mainForm.style.display = "none";
+        twoFactorSection.style.display = "block";
+        signInBtn.classList.remove("btn-loading");
+        signInBtn.disabled = false;
+      });
+
+      document.getElementById("totp").addEventListener("input", (e) => {
+        const code = e.target.value;
+        const error = document.getElementById("totpError");
+
+        if (code.length !== 6 || isNaN(code)) {
+          error.textContent = "Please enter a valid 6-digit code";
+          error.style.display = "block";
+        } else {
+          error.style.display = "none";
+        }
+      });
+
+      verifyBtn.addEventListener("click", async () => {
+        verifyBtn.classList.add("btn-loading");
+        verifyBtn.disabled = true;
+
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        if (document.getElementById("totp").value === "123456") {
+          window.location.href = "/dashboard";
+        } else {
+          verifyBtn.classList.remove("btn-loading");
+          verifyBtn.disabled = false;
+          twoFactorSection.classList.add("shake");
+          setTimeout(() => twoFactorSection.classList.remove("shake"), 400);
+        }
+      });
+
+      document.getElementById("forgotPassword").addEventListener("click", (e) => {
+        e.preventDefault();
+        alert("Password reset instructions sent to your email");
+      });
+    </script>
+  </body>
+</html>
