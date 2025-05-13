@@ -20,11 +20,30 @@ body {
 }
 
 .login-container {
-  background-color: #fff;
-  min-width: 500px;
+  width: 100%;
+  max-width: 1200px;
   margin: auto;
-  padding: 40px;
-  box-shadow: 0 10px 30px rgb(0, 0, 0, 0.1);
+  display: flex;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   overflow: hidden;
+}
+
+.login-left {
+  flex: 1;
+  background-color: var(--primary);
+  color: white;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-right {
+  width: 600px;
+  background-color: white;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
