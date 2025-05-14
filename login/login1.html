@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login system</title>
+    <style>
+      :root {
+        --primary: #4361ee;
+        --primary-light: #f0f2ff;
+        --dark: #1e1e1e;
+        --light: #f8f9fa;
+        --border: #e0e0e0;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: var(--light);
+        display: flex;
+        min-height: 100vh;
+      }
+
+      .login-container {
+        width: 100%;
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        box-shadow: 0 10px 30px rgb(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+
+      .login-left {
+        flex: 1;
+        background-color: var(--primary);
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-left"></div>
+      <div class="login-right"></div>
+    </div>
+  </body>
+</html>
