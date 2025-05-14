@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login system</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
       :root {
         --primary: #4361ee;
@@ -40,12 +44,107 @@
         flex: 1;
         background-color: var(--primary);
         color: #fff;
+        display: flex;
+        padding: 60px;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .login-left h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+
+      .login-left p {
+        font-size: 16.5px;
+        line-height: 1.6;
+        margin-bottom: 30px;
+        opacity: 0.9;
+      }
+
+      .features {
+        margin-bottom: 40px;
+      }
+
+      .feature-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .feature-item h4 {
+        margin: 0;
+        font-size: 18px;
+      }
+
+      .feature-item p {
+        margin: 2px 0 0;
+        font-size: 16px;
+      }
+
+      .feature-icon {
+        width: 40px;
+        height: 40px;
+        background-color: rgb(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin-right: 15px;
+        font-size: 18px;
+      }
+
+      .login-right {
+        width: 500px;
+        background-color: #fff;
+        padding: 60px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
     </style>
   </head>
   <body>
     <div class="login-container">
-      <div class="login-left"></div>
+      <div class="login-left">
+        <h1>Welcome to Accounting</h1>
+        <p>
+          Manage your finances with our powerful cloud-based accounting software
+          designed for businesses of all sizes.
+        </p>
+
+        <div class="features">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div>
+              <h4>Real-time Analytics</h4>
+              <p>Get instant insights into your financial health</p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-file-invoice-dollar"></i>
+            </div>
+            <div>
+              <h4>Invoice Management</h4>
+              <p>Create and track invoices effortlessly</p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <i class="fas fa-shield-alt"></i>
+            </div>
+            <div>
+              <h4>Bank-level Security</h4>
+              <p>Your data is protected with 256-bit encryption</p>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="login-right"></div>
     </div>
   </body>
